@@ -1,15 +1,20 @@
-
 import React from 'react';
-import {View, Text} from 'react-native';
 import {Provider} from 'react-redux';
 import store from './src/Store/configureStore';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import SearchFlightScreen from './src/Screens/SearchFlightScreen';
 
-import SearchFlight from './src/Screens/SearchFlight'
+const Stack = createStackNavigator();
 
 function App() {
   return (
     <Provider store={store}>
-      <SearchFlight/>
+      <NavigationContainer>
+        <Stack.Navigator headerMode="screen">
+          <Stack.Screen name="SearchFlight" component={SearchFlightScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </Provider>
   );
 }
