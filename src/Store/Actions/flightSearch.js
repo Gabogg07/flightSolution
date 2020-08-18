@@ -2,9 +2,9 @@ import {
   TOGGLE_CURRENCIES_LOADING_STATUS,
   CURRENCIES_LOAD_SUCCESS,
   CURRENCIES_LOAD_ERROR,
-  TOGGLE_PLACES_LOADING_STATUS,
-  PLACES_LOAD_SUCCESS,
-  PLACES_LOAD_ERROR,
+  TOGGLE_COUNTRIES_LOADING_STATUS,
+  COUNTRIES_LOAD_SUCCESS,
+  COUNTRIES_LOAD_ERROR,
 } from './actionTypes';
 
 export const toggleCurrenciesLoading = () => {
@@ -14,7 +14,6 @@ export const toggleCurrenciesLoading = () => {
 };
 
 export const currenciesLoadSuccess = (currencies) => {
-  console.log('RECIBI', currencies)
   return {
     type: CURRENCIES_LOAD_SUCCESS,
     currencies,
@@ -24,6 +23,26 @@ export const currenciesLoadSuccess = (currencies) => {
 export const currenciesLoadError = (error) => {
   return {
     type: CURRENCIES_LOAD_ERROR,
+    error,
+  };
+};
+
+export const toggleCountriesLoading = () => {
+  return {
+    type: TOGGLE_COUNTRIES_LOADING_STATUS,
+  };
+};
+
+export const countriesLoadSuccess = (countries) => {
+  return {
+    type: COUNTRIES_LOAD_SUCCESS,
+    countries,
+  };
+};
+
+export const countriesLoadError = (error) => {
+  return {
+    type: COUNTRIES_LOAD_ERROR,
     error,
   };
 };

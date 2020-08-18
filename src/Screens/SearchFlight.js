@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import React, {Component} from 'react';
+import {View, Text} from 'react-native';
 import {connect} from 'react-redux';
-import {fetchCurrencies} from '../Services/APICalls';
+import {fetchCurrencies, fetchCountries} from '../Services/APICalls';
 
 class SearchFlight extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
+    this.state = {};
   }
 
-  componentDidMount(){
-    this.props.fetchCurrencies()
+  componentDidMount() {
+    this.props.fetchCurrencies();
+    this.props.fetchCountries();
   }
 
   render() {
@@ -29,7 +29,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchCurrencies: () => dispatch(fetchCurrencies()),
+  fetchCountries: () => dispatch(fetchCountries()),
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchFlight);

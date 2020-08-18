@@ -2,18 +2,23 @@ import {
   TOGGLE_CURRENCIES_LOADING_STATUS,
   CURRENCIES_LOAD_SUCCESS,
   CURRENCIES_LOAD_ERROR,
-  TOGGLE_PLACES_LOADING_STATUS,
-  PLACES_LOAD_SUCCESS,
-  PLACES_LOAD_ERROR,
+  TOGGLE_COUNTRIES_LOADING_STATUS,
+  COUNTRIES_LOAD_SUCCESS,
+  COUNTRIES_LOAD_ERROR,
 } from '../Actions/actionTypes';
 
 const initialState = {
   currency: '',
-  currencies:{
+  currencies: {
     loading: false,
     error: false,
-    data: []
-  }
+    data: [],
+  },
+  countries: {
+    loading: false,
+    error: false,
+    data: [],
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -47,6 +52,37 @@ const reducer = (state = initialState, action) => {
           error: action.error,
         },
       };
+
+    case TOGGLE_COUNTRIES_LOADING_STATUS:
+      return {
+        ...state,
+        countries: {
+          ...state.countries,
+          loading: !state.countries.loading,
+        },
+      };
+
+    case COUNTRIES_LOAD_SUCCESS:
+      return {
+        ...state,
+        countries: {
+          ...state.countries,
+          loading: false,
+          error: false,
+          data: action.countries,
+        },
+      };
+
+    case COUNTRIES_LOAD_ERROR:
+      return {
+        ...state,
+        countries: {
+          ...state.countries,
+          loading: false,
+          error: action.error,
+        },
+      };
+
     default:
       return state;
   }

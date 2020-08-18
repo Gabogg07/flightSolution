@@ -2,6 +2,9 @@ import {
   toggleCurrenciesLoading,
   currenciesLoadSuccess,
   currenciesLoadError,
+  toggleCountriesLoading,
+  countriesLoadSuccess,
+  countriesLoadError,
 } from '../Store/Actions/flightSearch';
 import * as APIUrls from './APIUrls';
 
@@ -28,7 +31,31 @@ export function fetchCurrencies() {
       })
       .catch((err) => {
         dispatch(currenciesLoadError(err));
-        console.log(err);
       });
   };
 }
+
+export function fetchCountries() {
+  return (dispatch) => {
+    dispatch(toggleCountriesLoading());
+    fetch(APIUrls.GET_COUNTRIES, {
+      method: 'GET',
+      headers: {
+        'x-rapidapi-host': API_HOST,
+        'x-rapidapi-key': API_KEY,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.error) {
+          throw res.error;
+        }
+        dispatch(countriesLoadSuccess(res.Countries));
+        return res.data;
+      })
+      .catch((err) => {
+        dispatch(countriesLoadError(err));
+      });
+  };
+}
+
