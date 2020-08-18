@@ -2,9 +2,12 @@ import {
   TOGGLE_CURRENCIES_LOADING_STATUS,
   CURRENCIES_LOAD_SUCCESS,
   CURRENCIES_LOAD_ERROR,
-  TOGGLE_COUNTRIES_LOADING_STATUS,
-  COUNTRIES_LOAD_SUCCESS,
-  COUNTRIES_LOAD_ERROR,
+  TOGGLE_PLACES_LOADING_STATUS,
+  PLACES_LOAD_SUCCESS,
+  PLACES_LOAD_ERROR,
+  TOGGLE_RESULTS_LOADING_STATUS,
+  RESULTS_LOAD_SUCCESS,
+  RESULTS_LOAD_ERROR,
 } from './actionTypes';
 
 export const toggleCurrenciesLoading = () => {
@@ -27,22 +30,45 @@ export const currenciesLoadError = (error) => {
   };
 };
 
-export const toggleCountriesLoading = () => {
+export const togglePlacesLoading = (key) => {
   return {
-    type: TOGGLE_COUNTRIES_LOADING_STATUS,
+    type: TOGGLE_PLACES_LOADING_STATUS,
+    key,
   };
 };
 
-export const countriesLoadSuccess = (countries) => {
+export const placesLoadSuccess = (places, key) => {
   return {
-    type: COUNTRIES_LOAD_SUCCESS,
-    countries,
+    type: PLACES_LOAD_SUCCESS,
+    places,
+    key,
   };
 };
 
-export const countriesLoadError = (error) => {
+export const placesLoadError = (error, key) => {
   return {
-    type: COUNTRIES_LOAD_ERROR,
+    type: PLACES_LOAD_ERROR,
+    error,
+    key,
+  };
+};
+
+export const toggleResultsLoading = () => {
+  return {
+    type: TOGGLE_RESULTS_LOADING_STATUS,
+  };
+};
+
+export const resultsLoadSuccess = (results) => {
+  return {
+    type: RESULTS_LOAD_SUCCESS,
+    results,
+  };
+};
+
+export const resultsLoadError = (error) => {
+  return {
+    type: RESULTS_LOAD_ERROR,
     error,
   };
 };

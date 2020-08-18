@@ -2,9 +2,12 @@ import {
   TOGGLE_CURRENCIES_LOADING_STATUS,
   CURRENCIES_LOAD_SUCCESS,
   CURRENCIES_LOAD_ERROR,
-  TOGGLE_COUNTRIES_LOADING_STATUS,
-  COUNTRIES_LOAD_SUCCESS,
-  COUNTRIES_LOAD_ERROR,
+  TOGGLE_PLACES_LOADING_STATUS,
+  PLACES_LOAD_SUCCESS,
+  PLACES_LOAD_ERROR,
+  TOGGLE_RESULTS_LOADING_STATUS,
+  RESULTS_LOAD_SUCCESS,
+  RESULTS_LOAD_ERROR,
 } from '../Actions/actionTypes';
 
 const initialState = {
@@ -14,7 +17,17 @@ const initialState = {
     error: false,
     data: [],
   },
-  countries: {
+  originQuery: {
+    loading: false,
+    error: false,
+    data: [],
+  },
+  destinationQuery: {
+    loading: false,
+    error: false,
+    data: [],
+  },
+  results: {
     loading: false,
     error: false,
     data: [],
@@ -53,31 +66,61 @@ const reducer = (state = initialState, action) => {
         },
       };
 
-    case TOGGLE_COUNTRIES_LOADING_STATUS:
+    case TOGGLE_PLACES_LOADING_STATUS:
       return {
         ...state,
-        countries: {
-          ...state.countries,
-          loading: !state.countries.loading,
+        [action.key]: {
+          ...state[action.key],
+          loading: !state[action.key].loading,
         },
       };
 
-    case COUNTRIES_LOAD_SUCCESS:
+    case PLACES_LOAD_SUCCESS:
       return {
         ...state,
-        countries: {
-          ...state.countries,
+        [action.key]: {
+          ...state[action.key],
           loading: false,
           error: false,
-          data: action.countries,
+          data: action.places,
         },
       };
 
-    case COUNTRIES_LOAD_ERROR:
+    case PLACES_LOAD_ERROR:
       return {
         ...state,
-        countries: {
-          ...state.countries,
+        [action.key]: {
+          ...state[action.key],
+          loading: false,
+          error: action.error,
+        },
+      };
+
+    case TOGGLE_RESULTS_LOADING_STATUS:
+      return {
+        ...state,
+        results: {
+          ...state.results,
+          loading: !state.results.loading,
+        },
+      };
+
+    case RESULTS_LOAD_SUCCESS:
+      return {
+        ...state,
+        results: {
+          ...state.results,
+          loading: false,
+          error: false,
+          data: action.results,
+        },
+      };
+
+    case RESULTS_LOAD_ERROR:
+      return {
+        ...state,
+        results: {
+          ...state.results,
           loading: false,
           error: action.error,
         },

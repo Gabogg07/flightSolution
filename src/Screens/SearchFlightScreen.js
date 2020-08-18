@@ -1,44 +1,75 @@
 import React, {Component} from 'react';
-import {View, Text, SafeAreaView} from 'react-native';
+import {View, Text, SafeAreaView, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
-import {fetchCurrencies, fetchCountries} from '../Services/APICalls';
+import {fetchCurrencies, fetchPlaces, fetchResults} from '../Services/APICalls';
 import PickerWithTitle from '../Components/PickerWithTitle/PickerWithTitle';
 
 class SearchFlight extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      destinationCountry: '',
-      arrivalCountry: '',
+      destinationPlace: '',
+      arrivalPlace: '',
+      destinationQuery: '',
+      arrivalQuery: '',
+      currency: 'USD'
     };
   }
 
   componentDidMount() {
     this.props.fetchCurrencies();
-    this.props.fetchCountries();
   }
 
-  onPickerChange = (key, value) => {
+  onChange = (key, value) => {
+    console.log('LLEGYE', key,value)
     let {state} = this;
-    console.log(key, value);
     state[key] = value;
     this.setState(state);
   };
 
+  onQueryChange = (key, value) => {
+    let {currency} = this.state
+    this.onChange(key, value);
+    this.props.fetchPlaces(value, currency, key);
+  }
+
+
   render() {
     return (
-      <SafeAreaView>
+      <SafeAreaView style={styles.SafeAreaView}>
+        <PickerWithTitle
+          title={'Currency'}
+          data={this.props.currencies.data}
+          initValue="Select desired currency"
+          onPickerChange={(option) =>
+            this.onChange('currency', option.Code)
+          }
+          keyExtractor={(item) => item.Code}
+          labelExtractor={(item) => `${item.Code} - ${item.Symbol}`}
+          selectedKey = {this.state.currency}
+          hideInput
+        />
         <PickerWithTitle
           title={'Departure'}
-          data={this.props.countries.data}
+          data={this.props.originQuery.data}
           initValue="Select place of origin"
-          onChange={(option) => this.onPickerChange('arrivalCountry', option.Code)}
+          onPickerChange={(option) =>
+            this.onChange('originPlace', option.Code)
+          }
+          onQueryChange={(query) => this.onQueryChange('originQuery', query)}
+          keyExtractor={(item) => item.PlaceId}
+          labelExtractor={(item) => item.PlaceName}
         />
         <PickerWithTitle
           title={'Arrival'}
-          data={this.props.countries.data}
+          data={this.props.destinationQuery.data}
           initValue="Select place of arrival"
-          onChange={(option) => this.onPickerChange('destinationCountry', option.Code)}
+          onPickerChange={(option) =>
+            this.onChange('destinationPlace', option.Code)
+          }
+          onQueryChange={(query) => this.onQueryChange('destinationQuery', query)}
+          keyExtractor={(item) => item.PlaceId}
+          labelExtractor={(item) => item.PlaceName}
         />
       </SafeAreaView>
     );
@@ -47,12 +78,21 @@ class SearchFlight extends Component {
 
 const mapStateToProps = (state) => ({
   currencies: state.currencies,
-  countries: state.countries,
+  places: state.places,
+  originQuery: state.originQuery,
+  destinationQuery: state.destinationQuery,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   fetchCurrencies: () => dispatch(fetchCurrencies()),
-  fetchCountries: () => dispatch(fetchCountries()),
+  fetchPlaces: (query, currency, key) => dispatch(fetchPlaces(query, currency, key)),
+  fetchResults: () => dispatch(fetchResults()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchFlight);
+
+const styles = StyleSheet.create({
+  SafeAreaView: {
+    marginHorizontal: 20
+  }
+})

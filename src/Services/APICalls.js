@@ -2,9 +2,12 @@ import {
   toggleCurrenciesLoading,
   currenciesLoadSuccess,
   currenciesLoadError,
-  toggleCountriesLoading,
-  countriesLoadSuccess,
-  countriesLoadError,
+  togglePlacesLoading,
+  placesLoadSuccess,
+  placesLoadError,
+  toggleResultsLoading,
+  resultsLoadSuccess,
+  resultsLoadError,
 } from '../Store/Actions/flightSearch';
 import * as APIUrls from './APIUrls';
 
@@ -35,10 +38,11 @@ export function fetchCurrencies() {
   };
 }
 
-export function fetchCountries() {
+export function fetchPlaces(query, currency, key) {
   return (dispatch) => {
-    dispatch(toggleCountriesLoading());
-    fetch(APIUrls.GET_COUNTRIES, {
+    dispatch(togglePlacesLoading(key));
+    console.log(APIUrls.GET_PLACES('GBP', query))
+    fetch(APIUrls.GET_PLACES(currency, query), {
       method: 'GET',
       headers: {
         'x-rapidapi-host': API_HOST,
@@ -50,11 +54,36 @@ export function fetchCountries() {
         if (res.error) {
           throw res.error;
         }
-        dispatch(countriesLoadSuccess(res.Countries));
+        console.log(res)
+        dispatch(placesLoadSuccess(res.Places, key));
         return res.data;
       })
       .catch((err) => {
-        dispatch(countriesLoadError(err));
+        dispatch(placesLoadError(err, key));
+      });
+  };
+}
+
+export function fetchResults(currency, origin, destination, outDate, inDate) {
+  return (dispatch) => {
+    dispatch(toggleResultsLoading());
+    fetch(APIUrls.GET_PLACES, {
+      method: 'GET',
+      headers: {
+        'x-rapidapi-host': API_HOST,
+        'x-rapidapi-key': API_KEY,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.error) {
+          throw res.error;
+        }
+        dispatch(resultsLoadSuccess(res.Places));
+        return res.data;
+      })
+      .catch((err) => {
+        dispatch(resultsLoadError(err));
       });
   };
 }
