@@ -41,7 +41,6 @@ export function fetchCurrencies() {
 export function fetchPlaces(query, currency, key) {
   return (dispatch) => {
     dispatch(togglePlacesLoading(key));
-    console.log(APIUrls.GET_PLACES('GBP', query))
     fetch(APIUrls.GET_PLACES(currency, query), {
       method: 'GET',
       headers: {

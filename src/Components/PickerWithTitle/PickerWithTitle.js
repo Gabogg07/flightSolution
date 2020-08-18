@@ -16,28 +16,26 @@ class PickerWithTitle extends Component {
     });
   };
 
-
   onSubmit = () => {
-    console.log('TERMINE', this.state.query)
     this.props.onQueryChange(this.state.query);
   };
-
 
   render() {
     const {props} = this;
     return (
       <View style={styles.container}>
         <Text style={styles.title}>{props.title}: </Text>
-        {!props.hideInput &&
+        {!props.hideInput && (
           <TextInput
             onChangeText={this.onChangeText}
             onSubmitEditing={this.onSubmit}
             value={this.state.query}
             style={styles.textInput}
             placeholderTextColor="black"
-            placeholder = "Search for values"
+            placeholder="Search for values"
+            {...this.props}
           />
-        }
+        )}
         <ModalSelector
           data={props.data}
           initValue={props.initValue}
@@ -57,12 +55,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginVertical: 10,
   },
-  container:{
-    marginVertical: 5
+  container: {
+    marginVertical: 5,
   },
-  textInput:{
-    height: 40, borderColor: 'gray', borderWidth: 1,
-    marginVertical:5,
-    paddingHorizontal:10
-  }
+  textInput: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginVertical: 5,
+    paddingHorizontal: 10,
+  },
 });
