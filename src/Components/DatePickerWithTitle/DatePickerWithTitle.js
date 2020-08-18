@@ -45,8 +45,9 @@ class DatePickerWithTitle extends Component {
           <DateTimePicker
             testID="dateTimePicker"
             mode='date'
-            value={this.state.date || new Date()}
+            value={new Date()}
             onChange={this.onChange}
+            textColor="black"
           />
         )}
     </View>

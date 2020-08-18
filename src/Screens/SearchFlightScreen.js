@@ -3,6 +3,9 @@ import {View, Text, SafeAreaView, StyleSheet, ScrollView} from 'react-native';
 import {connect} from 'react-redux';
 import {fetchCurrencies, fetchPlaces, fetchResults} from '../Services/APICalls';
 import PickerWithTitle from '../Components/PickerWithTitle/PickerWithTitle';
+import DatePickerWithTitle from '../Components/DatePickerWithTitle/DatePickerWithTitle';
+
+
 
 class SearchFlight extends Component {
   constructor(props) {
@@ -71,6 +74,7 @@ class SearchFlight extends Component {
             keyExtractor={(item) => item.PlaceId}
             labelExtractor={(item) => item.PlaceName}
           />
+          <DatePickerWithTitle/>
         </ScrollView>
       </SafeAreaView>
     );
