@@ -53,7 +53,6 @@ export function fetchPlaces(query, currency, key) {
         if (res.error) {
           throw res.error;
         }
-        console.log(res)
         dispatch(placesLoadSuccess(res.Places, key));
         return res.data;
       })

@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 class DatePickerWithTitle extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isVisible: false,
-
+      date: ''
     };
   }
 
@@ -20,39 +22,48 @@ class DatePickerWithTitle extends Component {
   };
 
    handleConfirm = (date) => {
-    console.warn("A date has been picked: ", date);
+    this.setState({date})
     this.hideDatePicker();
   };
 
-  onChange = (date)=>{
-    console.log(date)
-    this.setState({date})
-  } 
-
   render() {
-    const show=true;
-
-  
+    const {props} = this
     return (
       <View>
-        {/* <View>
-          <Button onPress={showDatepicker} title="Show date picker!" />
-        </View>
-        <View>
-          <Button onPress={showTimepicker} title="Show time picker!" />
-        </View> */}
-        {show && (
-          <DateTimePicker
-            testID="dateTimePicker"
-            mode='date'
-            value={new Date()}
-            onChange={this.onChange}
-            textColor="black"
-          />
-        )}
+        <Text style={styles.title}>{props.title}</Text>
+        <TouchableWithoutFeedback onPress={this.showDatePicker} style={styles.dateField}>
+          <Text>{`${this.state.date}` || "Pick a date"}</Text>
+        </TouchableWithoutFeedback>
+        <DateTimePickerModal
+          isVisible={this.state.isVisible}
+          mode="date"
+          onConfirm={this.handleConfirm}
+          onCancel={this.hideDatePicker}
+        />
     </View>
     );
   }
 }
 
 export default DatePickerWithTitle;
+
+const styles = StyleSheet.create({
+  title: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    marginVertical: 10,
+  },
+  container: {
+    marginVertical: 5,
+  },
+  dateField: {
+    height: 40,
+    borderColor: 'lightgrey',
+    borderWidth: 1,
+    marginVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius:5,
+    alignItems:'center',
+    justifyContent:'center'
+  },
+});

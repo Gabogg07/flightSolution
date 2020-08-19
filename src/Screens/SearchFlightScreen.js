@@ -24,7 +24,6 @@ class SearchFlight extends Component {
   }
 
   onChange = (key, value) => {
-    console.log('LLEGYE', key, value);
     let {state} = this;
     state[key] = value;
     this.setState(state);
@@ -74,7 +73,14 @@ class SearchFlight extends Component {
             keyExtractor={(item) => item.PlaceId}
             labelExtractor={(item) => item.PlaceName}
           />
-          <DatePickerWithTitle/>
+          <DatePickerWithTitle
+            title={'Departure Date'}
+            onChange={(date) => this.onChange('departureDate', date)}
+          />
+          <DatePickerWithTitle
+            title={'Arrival Date'}
+            onChange={(date) => this.onChange('arrivalDate', date)}
+          />
         </ScrollView>
       </SafeAreaView>
     );
