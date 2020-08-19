@@ -19,7 +19,7 @@ class SearchFlight extends Component {
       arrivalDate: new Date(),
       currency: 'USD',
       showError: false,
-      showError: false
+      showError: false,
     };
   }
 
@@ -51,18 +51,13 @@ class SearchFlight extends Component {
     } = state;
 
     if (destinationPlace === '' || originPlace === '') {
-      console.log('VACIO')
       state.showError = true;
       this.setState(state);
-      return null
+      return null;
     }
 
-
-    console.log(departureDate, arrivalDate);
-    console.log(
-      format(departureDate, 'yyyy-mm-dd'),
-      format(arrivalDate, 'yyyy-mm-dd'),
-    );
+    state.showError = false;
+    this.setState(state);
     let formatedDates = [
       format(departureDate, 'yyyy-mm-dd'),
       format(arrivalDate, 'yyyy-mm-dd'),
@@ -80,6 +75,11 @@ class SearchFlight extends Component {
     return (
       <SafeAreaView style={styles.SafeAreaView}>
         <ScrollView>
+          {this.state.showError && (
+            <View style={styles.errorBox}>
+              <Text style={styles.errorText}> Please fill all the fields</Text>
+            </View>
+          )}
           <PickerWithTitle
             title={'Currency'}
             data={this.props.currencies.data}
@@ -89,7 +89,7 @@ class SearchFlight extends Component {
             labelExtractor={(item) => `${item.Code} - ${item.Symbol}`}
             selectedKey={this.state.currency}
             hideInput
-            enableError={this.state.showError}
+            showError={this.state.showError}
           />
           <PickerWithTitle
             title={'Departure'}
@@ -99,7 +99,7 @@ class SearchFlight extends Component {
             onQueryChange={(query) => this.onQueryChange('originQuery', query)}
             keyExtractor={(item) => item.PlaceId}
             labelExtractor={(item) => item.PlaceName}
-            enableError={this.state.showError}
+            showError={this.state.showError}
           />
           <PickerWithTitle
             title={'Arrival'}
@@ -111,20 +111,20 @@ class SearchFlight extends Component {
             }
             keyExtractor={(item) => item.PlaceId}
             labelExtractor={(item) => item.PlaceName}
-            enableError={this.state.showError}
+            showError={this.state.showError}
           />
           <View style={{flexDirection: 'row'}}>
             <DatePickerWithTitle
               title={'Departure Date'}
               onChange={(date) => this.onChange('departureDate', date)}
               minimumDate={new Date()}
-              enableError={this.state.showError}
+              showError={this.state.showError}
             />
             <DatePickerWithTitle
               title={'Arrival Date'}
               onChange={(date) => this.onChange('arrivalDate', date)}
               minimumDate={this.state.departureDate}
-              enableError={this.state.showError}
+              showError={this.state.showError}
             />
           </View>
 
@@ -173,5 +173,15 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 20,
     fontWeight: 'bold',
+  },
+  errorText: {
+    fontSize: 15,
+  },
+  errorBox: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'tomato',
+    paddingVertical: 10,
+    borderRadius: 5,
   },
 });

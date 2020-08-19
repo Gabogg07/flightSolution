@@ -22,10 +22,13 @@ class PickerWithTitle extends Component {
 
   onChange = (option) => {
     this.props.onPickerChange(option.PlaceId);
+    this.setState({
+      option
+    });
   };
 
   render() {
-    const {props} = this;
+    const {props, state} = this;
     return (
       <View style={styles.container}>
         <Text style={styles.title}>{props.title}: </Text>
@@ -34,7 +37,7 @@ class PickerWithTitle extends Component {
             onChangeText={this.onChangeText}
             onEndEditing={this.onSubmit}
             value={this.state.query}
-            style={styles.textInput}
+            style={[styles.textInput,(props.showError && state.query==='' && !props.hideInput) && {borderColor:'red', borderWidth:1}]}
             placeholderTextColor="black"
             placeholder="Search for values"
             {...this.props}
@@ -45,6 +48,7 @@ class PickerWithTitle extends Component {
             data={props.data}
             initValue={props.initValue}
             onChange={this.onChange}
+            style={(props.showError && !state.option && !props.hideInput) && {borderColor:'red', borderWidth:1}}
             {...this.props}
           />
         )}
