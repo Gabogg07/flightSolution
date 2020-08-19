@@ -10,6 +10,7 @@ class DatePickerWithTitle extends Component {
     super(props);
     this.state = {
       isVisible: false,
+      date: props.minimumDate,
     };
   }
 
@@ -35,11 +36,7 @@ class DatePickerWithTitle extends Component {
         <TouchableWithoutFeedback
           onPress={this.showDatePicker}
           style={styles.dateField}>
-          <Text>
-            {this.state.date
-              ? `${format(this.state.date, 'dd MMM, yyyy')}`
-              : 'Pick a date'}
-          </Text>
+          <Text>{`${format(this.state.date, 'dd MMM, yyyy')}`}</Text>
         </TouchableWithoutFeedback>
         <DateTimePickerModal
           isVisible={this.state.isVisible}
@@ -47,6 +44,7 @@ class DatePickerWithTitle extends Component {
           onConfirm={this.handleConfirm}
           onCancel={this.hideDatePicker}
           isDarkModeEnabled
+          value={props.minimumDate}
           {...props}
         />
       </View>
@@ -62,7 +60,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginVertical: 10,
     alignSelf: 'center',
-    color:'white'
+    color: 'white',
   },
   container: {
     margin: 5,
@@ -78,6 +76,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor:'white'
+    backgroundColor: 'white',
   },
 });
