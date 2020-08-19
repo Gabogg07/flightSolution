@@ -40,13 +40,14 @@ class PickerWithTitle extends Component {
             {...this.props}
           />
         )}
-        <ModalSelector
-          data={props.data}
-          initValue={props.initValue}
-          onChange={this.onChange}
-          disabled={props.data.length === 0}
-          {...this.props}
-        />
+        {props.data.length !== 0 &&
+          <ModalSelector
+            data={props.data}
+            initValue={props.initValue}
+            onChange={this.onChange}
+            {...this.props}
+          />
+        }
       </View>
     );
   }
