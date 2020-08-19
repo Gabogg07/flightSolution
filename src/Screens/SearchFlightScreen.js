@@ -19,7 +19,7 @@ class SearchFlight extends Component {
       arrivalDate: new Date(),
       currency: 'USD',
       showError: false,
-      showError: false,
+      errorMessage: '',
     };
   }
 
@@ -39,8 +39,22 @@ class SearchFlight extends Component {
     this.props.fetchPlaces(value, currency, key);
   };
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (
+      nextProps.currencies.error ||
+      nextProps.originQuery.error ||
+      nextProps.destinationQuery.error
+    ) {
+      return {
+        errorMessage: 'There was a problem loading the data',
+      };
+    }
+
+    return null;
+  }
+
   onSearch = () => {
-    const {state} = this;
+    const {state, props} = this;
 
     const {
       currency,
@@ -59,8 +73,8 @@ class SearchFlight extends Component {
     state.showError = false;
     this.setState(state);
     let formatedDates = [
-      format(departureDate, 'yyyy-mm-dd'),
-      format(arrivalDate, 'yyyy-mm-dd'),
+      format(departureDate, 'yyyy-MM-dd'),
+      format(arrivalDate, 'yyyy-MM-dd'),
     ];
     this.props.fetchResults(
       currency,
@@ -69,6 +83,7 @@ class SearchFlight extends Component {
       formatedDates[0],
       formatedDates[1],
     );
+    props.navigation.navigate('SearchResults');
   };
 
   render() {
@@ -80,6 +95,13 @@ class SearchFlight extends Component {
               <Text style={styles.errorText}> Please fill all the fields</Text>
             </View>
           )}
+
+          {this.state.errorMessage !== '' && (
+            <View style={styles.errorBox}>
+              <Text style={styles.errorText}>{this.state.errorMessage}</Text>
+            </View>
+          )}
+
           <PickerWithTitle
             title={'Currency'}
             data={this.props.currencies.data}
@@ -141,7 +163,6 @@ class SearchFlight extends Component {
 
 const mapStateToProps = (state) => ({
   currencies: state.currencies,
-  places: state.places,
   originQuery: state.originQuery,
   destinationQuery: state.destinationQuery,
 });
@@ -160,9 +181,10 @@ const styles = StyleSheet.create({
   SafeAreaView: {
     paddingHorizontal: 20,
     flex: 1,
+    backgroundColor: 'midnightblue'
   },
   searchButton: {
-    backgroundColor: '#83bce5',
+    backgroundColor: 'mediumturquoise',
     borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',
@@ -183,5 +205,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'tomato',
     paddingVertical: 10,
     borderRadius: 5,
+    marginTop: 5,
   },
 });

@@ -12,9 +12,27 @@ function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="SearchFlight" component={SearchFlightScreen} />
-          <Stack.Screen name="SearchResult" component={SearchResultsScreen} />
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: 'midnightblue',
+            },
+            headerTintColor: 'white',
+          }}>
+          <Stack.Screen
+            name="SearchFlight"
+            component={SearchFlightScreen}
+            options={{
+              title: 'Flight Solution',
+            }}
+          />
+          <Stack.Screen
+            name="SearchResults"
+            component={SearchResultsScreen}
+            options={{
+              title: 'Search Results',
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
@@ -22,3 +40,5 @@ function App() {
 }
 
 export default App;
+
+//

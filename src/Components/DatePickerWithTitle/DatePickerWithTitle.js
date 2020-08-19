@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginVertical: 10,
     alignSelf: 'center',
+    color:'white'
   },
   container: {
     margin: 5,
@@ -77,5 +78,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor:'white'
   },
 });

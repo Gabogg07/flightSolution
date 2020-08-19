@@ -48,7 +48,8 @@ class PickerWithTitle extends Component {
             data={props.data}
             initValue={props.initValue}
             onChange={this.onChange}
-            style={(props.showError && !state.option && !props.hideInput) && {borderColor:'red', borderWidth:1}}
+            style={styles.modalSelector, (props.showError && !state.option && !props.hideInput) && {borderColor:'red', borderWidth:1}}
+            touchableStyle={{backgroundColor:'white', borderRadius:5}}
             {...this.props}
           />
         )}
@@ -64,6 +65,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 20,
     marginVertical: 10,
+    color:'white'
   },
   container: {
     marginVertical: 5,
@@ -75,5 +77,9 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     paddingHorizontal: 10,
     borderRadius: 5,
+    backgroundColor:'white'
   },
+  modalSelector:{
+    backgroundColor:'white'
+  }
 });
