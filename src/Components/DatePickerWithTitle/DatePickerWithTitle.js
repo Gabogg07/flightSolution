@@ -47,6 +47,7 @@ class DatePickerWithTitle extends Component {
           onConfirm={this.handleConfirm}
           onCancel={this.hideDatePicker}
           isDarkModeEnabled
+          {...props}
         />
       </View>
     );

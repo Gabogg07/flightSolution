@@ -35,7 +35,6 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-  console.log(action.type)
   switch (action.type) {
     case TOGGLE_CURRENCIES_LOADING_STATUS:
       return {
@@ -98,13 +97,12 @@ const reducer = (state = initialState, action) => {
       };
 
     case TOGGLE_RESULTS_LOADING_STATUS:
-      console.log('FALLE')
       return {
         ...state,
-        // results: {
-        //   ...state.results,
-        //   loading: !state.results.loading,
-        // },
+        results: {
+          ...state.results,
+          loading: !state.results.loading,
+        },
       };
 
     case RESULTS_LOAD_SUCCESS:

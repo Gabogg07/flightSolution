@@ -5,7 +5,7 @@ import {fetchCurrencies, fetchPlaces, fetchResults} from '../Services/APICalls';
 import PickerWithTitle from '../Components/PickerWithTitle/PickerWithTitle';
 import DatePickerWithTitle from '../Components/DatePickerWithTitle/DatePickerWithTitle';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
-import { format } from "date-fns";
+import {format} from 'date-fns';
 
 class SearchFlight extends Component {
   constructor(props) {
@@ -15,7 +15,11 @@ class SearchFlight extends Component {
       destinationPlace: '',
       originQuery: '',
       destinationQuery: '',
+      departureDate: new Date(),
+      arrivalDate: new Date(),
       currency: 'USD',
+      showError: false,
+      showError: false
     };
   }
 
@@ -26,7 +30,6 @@ class SearchFlight extends Component {
   onChange = (key, value) => {
     let {state} = this;
     state[key] = value;
-    console.log('CHANING', key,value)
     this.setState(state);
   };
 
@@ -37,19 +40,33 @@ class SearchFlight extends Component {
   };
 
   onSearch = () => {
+    const {state} = this;
+
     const {
       currency,
       originPlace,
       destinationPlace,
       departureDate,
       arrivalDate,
-    } = this.state;
+    } = state;
 
-    console.log(departureDate, arrivalDate)
+    if (destinationPlace === '' || originPlace === '') {
+      console.log('VACIO')
+      state.showError = true;
+      this.setState(state);
+      return null
+    }
+
+
+    console.log(departureDate, arrivalDate);
+    console.log(
+      format(departureDate, 'yyyy-mm-dd'),
+      format(arrivalDate, 'yyyy-mm-dd'),
+    );
     let formatedDates = [
-      format(departureDate, "yyyy-mm-dd"),
-      format(arrivalDate, "yyyy-mm-dd")
-    ]
+      format(departureDate, 'yyyy-mm-dd'),
+      format(arrivalDate, 'yyyy-mm-dd'),
+    ];
     this.props.fetchResults(
       currency,
       originPlace,
@@ -72,6 +89,7 @@ class SearchFlight extends Component {
             labelExtractor={(item) => `${item.Code} - ${item.Symbol}`}
             selectedKey={this.state.currency}
             hideInput
+            enableError={this.state.showError}
           />
           <PickerWithTitle
             title={'Departure'}
@@ -81,6 +99,7 @@ class SearchFlight extends Component {
             onQueryChange={(query) => this.onQueryChange('originQuery', query)}
             keyExtractor={(item) => item.PlaceId}
             labelExtractor={(item) => item.PlaceName}
+            enableError={this.state.showError}
           />
           <PickerWithTitle
             title={'Arrival'}
@@ -92,15 +111,20 @@ class SearchFlight extends Component {
             }
             keyExtractor={(item) => item.PlaceId}
             labelExtractor={(item) => item.PlaceName}
+            enableError={this.state.showError}
           />
           <View style={{flexDirection: 'row'}}>
             <DatePickerWithTitle
               title={'Departure Date'}
               onChange={(date) => this.onChange('departureDate', date)}
+              minimumDate={new Date()}
+              enableError={this.state.showError}
             />
             <DatePickerWithTitle
               title={'Arrival Date'}
               onChange={(date) => this.onChange('arrivalDate', date)}
+              minimumDate={this.state.departureDate}
+              enableError={this.state.showError}
             />
           </View>
 
