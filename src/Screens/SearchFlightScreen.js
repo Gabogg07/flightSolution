@@ -135,7 +135,7 @@ class SearchFlight extends Component {
             labelExtractor={(item) => item.PlaceName}
             showError={this.state.showError}
           />
-          <View style={{flexDirection: 'row'}}>
+          <View style={styles.rowContainer}>
             <DatePickerWithTitle
               title={'Departure Date'}
               onChange={(date) => this.onChange('departureDate', date)}
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
   SafeAreaView: {
     paddingHorizontal: 20,
     flex: 1,
-    backgroundColor: 'midnightblue'
+    backgroundColor: 'midnightblue',
   },
   searchButton: {
     backgroundColor: 'mediumturquoise',
@@ -208,4 +208,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginTop: 5,
   },
+  rowContainer:{
+    flexDirection:'row',
+  }
 });

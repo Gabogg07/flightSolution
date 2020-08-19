@@ -23,7 +23,7 @@ class PickerWithTitle extends Component {
   onChange = (option) => {
     this.props.onPickerChange(option.PlaceId);
     this.setState({
-      option
+      option,
     });
   };
 
@@ -37,7 +37,13 @@ class PickerWithTitle extends Component {
             onChangeText={this.onChangeText}
             onEndEditing={this.onSubmit}
             value={this.state.query}
-            style={[styles.textInput,(props.showError && state.query==='' && !props.hideInput) && {borderColor:'red', borderWidth:1}]}
+            style={[
+              styles.textInput,
+              props.showError &&
+                state.query === '' &&
+                !props.hideInput &&
+                styles.errorContainer,
+            ]}
             placeholderTextColor="black"
             placeholder="Search for values"
             {...this.props}
@@ -48,8 +54,14 @@ class PickerWithTitle extends Component {
             data={props.data}
             initValue={props.initValue}
             onChange={this.onChange}
-            style={styles.modalSelector, (props.showError && !state.option && !props.hideInput) && {borderColor:'red', borderWidth:1}}
-            touchableStyle={{backgroundColor:'white', borderRadius:5}}
+            style={
+              (styles.modalSelector,
+              props.showError &&
+                !state.option &&
+                !props.hideInput &&
+                styles.errorContainer)
+            }
+            touchableStyle={styles.modalTouchable}
             {...this.props}
           />
         )}
@@ -65,7 +77,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 20,
     marginVertical: 10,
-    color:'white'
+    color: 'white',
   },
   container: {
     marginVertical: 5,
@@ -77,9 +89,17 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     paddingHorizontal: 10,
     borderRadius: 5,
-    backgroundColor:'white'
+    backgroundColor: 'white',
   },
-  modalSelector:{
-    backgroundColor:'white'
-  }
+  modalSelector: {
+    backgroundColor: 'white',
+  },
+  modalTouchable: {
+    backgroundColor: 'white',
+    borderRadius: 5,
+  },
+  errorContainer: {
+    borderColor: 'red',
+    borderWidth: 1,
+  },
 });

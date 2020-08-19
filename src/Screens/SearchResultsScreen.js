@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, SafeAreaView, StyleSheet} from 'react-native';
+import {Text, SafeAreaView, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import ResultRow from '../Components/ResultRow/ResultRow';
 
@@ -16,7 +16,11 @@ class SearchResultsScreen extends Component {
     if (resultLength === 0) {
       return (
         <SafeAreaView style={styles.emptyResultsContainer}>
-          <Text> No available flights for search parameters</Text>
+          <Text style={styles.emptySearchText}>
+            {results.error
+              ? 'There was a problem loading the results'
+              : 'No available flights for search parameters'}
+          </Text>
         </SafeAreaView>
       );
     }
@@ -46,6 +50,15 @@ const styles = StyleSheet.create({
   emptyResultsContainer: {
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'midnightblue',
+    flex: 1,
+  },
+  emptySearchText: {
+    color: 'white',
+    fontSize: 15,
+    alignSelf: 'center',
+    margin: 10,
+    fontWeight: 'bold',
   },
   text: {
     color: 'white',

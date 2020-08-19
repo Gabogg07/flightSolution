@@ -54,14 +54,12 @@ export const placesLoadError = (error, key) => {
 };
 
 export const toggleResultsLoading = () => {
-  console.log('TOGGLE')
   return {
     type: TOGGLE_RESULTS_LOADING_STATUS,
   };
 };
 
 export const resultsLoadSuccess = (results) => {
-  console.log('RESULT')
   return {
     type: RESULTS_LOAD_SUCCESS,
     results,
