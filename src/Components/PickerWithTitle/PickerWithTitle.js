@@ -20,6 +20,11 @@ class PickerWithTitle extends Component {
     this.props.onQueryChange(this.state.query);
   };
 
+  onChange = (option) => {
+    console.log(option.PlaceId)
+    this.props.onPickerChange(option.PlaceId)
+  }
+
   render() {
     const {props} = this;
     return (
@@ -39,7 +44,7 @@ class PickerWithTitle extends Component {
         <ModalSelector
           data={props.data}
           initValue={props.initValue}
-          onChange={props.onPickerChange}
+          onChange={this.onChange}
           {...this.props}
         />
       </View>

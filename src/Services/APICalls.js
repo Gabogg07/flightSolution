@@ -63,9 +63,11 @@ export function fetchPlaces(query, currency, key) {
 }
 
 export function fetchResults(currency, origin, destination, outDate, inDate) {
+  console.log(APIUrls.GET_RESULTS(currency, origin, destination, outDate, inDate))
   return (dispatch) => {
+
     dispatch(toggleResultsLoading());
-    fetch(APIUrls.GET_PLACES, {
+    fetch(APIUrls.GET_RESULTS(currency, origin, destination, outDate, inDate), {
       method: 'GET',
       headers: {
         'x-rapidapi-host': API_HOST,
@@ -75,9 +77,14 @@ export function fetchResults(currency, origin, destination, outDate, inDate) {
       .then((res) => res.json())
       .then((res) => {
         if (res.error) {
+          console.log(res)
           throw res.error;
         }
-        dispatch(resultsLoadSuccess(res.Places));
+        if(res.ValidationErrors){
+          console.log(res.ValidationErrors)
+          throw res.ValidationErrors[0].Message
+        }
+        dispatch(resultsLoadSuccess(res));
         return res.data;
       })
       .catch((err) => {
