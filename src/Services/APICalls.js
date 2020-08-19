@@ -84,7 +84,7 @@ export function fetchResults(currency, origin, destination, outDate, inDate) {
           console.log(res.ValidationErrors)
           throw res.ValidationErrors[0].Message
         }
-        dispatch(resultsLoadSuccess(res));
+        dispatch(resultsLoadSuccess(res.Quotes));
         return res.data;
       })
       .catch((err) => {

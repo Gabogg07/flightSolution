@@ -83,7 +83,7 @@ class SearchFlight extends Component {
       formatedDates[0],
       formatedDates[1],
     );
-    props.navigation.navigate('SearchResults');
+    props.navigation.navigate('SearchResults', {results: props.results});
   };
 
   render() {
@@ -165,6 +165,7 @@ const mapStateToProps = (state) => ({
   currencies: state.currencies,
   originQuery: state.originQuery,
   destinationQuery: state.destinationQuery,
+  results: state.results,
 });
 
 const mapDispatchToProps = (dispatch) => ({
