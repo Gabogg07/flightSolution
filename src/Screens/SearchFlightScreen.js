@@ -67,7 +67,7 @@ class SearchFlight extends Component {
             title={'Currency'}
             data={this.props.currencies.data}
             initValue="Select desired currency"
-            onPickerChange={(option) => this.onChange('currency', option.Code)}
+            onPickerChange={(value) => this.onChange('currency', value)}
             keyExtractor={(item) => item.Code}
             labelExtractor={(item) => `${item.Code} - ${item.Symbol}`}
             selectedKey={this.state.currency}
