@@ -18,6 +18,8 @@
 		4B2B53AE5990946FA6902BCD /* libPods-flightSolution-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EBBF14E47A7A80BDD348ADE /* libPods-flightSolution-tvOSTests.a */; };
 		52964F4C3E3904A82914395C /* libPods-flightSolution.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0CBB018D1F3804AEE95405F /* libPods-flightSolution.a */; };
 		562B4A6907AC5009F8B2DEA1 /* libPods-flightSolution-flightSolutionTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C54739F2638B091FFE36E47 /* libPods-flightSolution-flightSolutionTests.a */; };
+		5EF63A5F24EDFC8B00EECF61 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EF63A5E24EDFC8800EECF61 /* Launch Screen.storyboard */; };
+		5EF63A6124EE019C00EECF61 /* airplaneLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EF63A6024EE019C00EECF61 /* airplaneLogo.png */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		DA28CE8AE2FC5A3AFAD0965D /* libPods-flightSolution-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CA624844FA261F470E8A5D94 /* libPods-flightSolution-tvOS.a */; };
 /* End PBXBuildFile section */
@@ -57,6 +59,8 @@
 		2D02E4901E0B4A5D006451C7 /* flightSolution-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "flightSolution-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		36FAE96C3BCD100974B33F7A /* Pods-flightSolution-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flightSolution-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-flightSolution-tvOS/Pods-flightSolution-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		4C54739F2638B091FFE36E47 /* libPods-flightSolution-flightSolutionTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-flightSolution-flightSolutionTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5EF63A5E24EDFC8800EECF61 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		5EF63A6024EE019C00EECF61 /* airplaneLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = airplaneLogo.png; sourceTree = "<group>"; };
 		788179E488BF22C7145956A8 /* Pods-flightSolution-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flightSolution-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-flightSolution-tvOSTests/Pods-flightSolution-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		78D9AD25FD683DE7B93AAD77 /* Pods-flightSolution-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flightSolution-tvOS.release.xcconfig"; path = "Target Support Files/Pods-flightSolution-tvOS/Pods-flightSolution-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		7C13B6E5AD9F8C1BA1E1F4B3 /* Pods-flightSolution-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flightSolution-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-flightSolution-tvOSTests/Pods-flightSolution-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -125,6 +129,7 @@
 		13B07FAE1A68108700A75B9A /* flightSolution */ = {
 			isa = PBXGroup;
 			children = (
+				5EF63A6024EE019C00EECF61 /* airplaneLogo.png */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -132,6 +137,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				5EF63A5E24EDFC8800EECF61 /* Launch Screen.storyboard */,
 			);
 			name = flightSolution;
 			sourceTree = "<group>";
@@ -340,6 +346,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EF63A6124EE019C00EECF61 /* airplaneLogo.png in Resources */,
+				5EF63A5F24EDFC8B00EECF61 /* Launch Screen.storyboard in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
