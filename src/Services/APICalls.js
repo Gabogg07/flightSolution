@@ -14,6 +14,9 @@ import * as APIUrls from './APIUrls';
 const API_KEY = '014a286311msha624aa971032cf7p199d47jsn20ae7ceaa1b2';
 const API_HOST = 'skyscanner-skyscanner-flight-search-v1.p.rapidapi.com';
 
+/**
+ * Fetches the currency list from the skyScanner API
+ */
 export function fetchCurrencies() {
   return (dispatch) => {
     dispatch(toggleCurrenciesLoading());
@@ -38,6 +41,12 @@ export function fetchCurrencies() {
   };
 }
 
+/**
+ * Fetches the places list according to the query. Stores in redux under the key name
+ * @param {*} query Query for the places to be searched
+ * @param {*} currency Currency param for the API Call
+ * @param {*} key Key to store the results in redux state
+ */
 export function fetchPlaces(query, currency, key) {
   return (dispatch) => {
     dispatch(togglePlacesLoading(key));
@@ -62,6 +71,14 @@ export function fetchPlaces(query, currency, key) {
   };
 }
 
+/**
+ * Fetch quotes results from the skyscanner API
+ * @param {*} currency Currency for the search
+ * @param {*} origin Origin place for the search
+ * @param {*} destination Destination place for the search
+ * @param {*} outDate Outbound/departure date
+ * @param {*} inDate Inbound/arrival date
+ */
 export function fetchResults(currency, origin, destination, outDate, inDate) {
   return (dispatch) => {
     dispatch(toggleResultsLoading());

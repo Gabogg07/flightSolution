@@ -2,6 +2,10 @@ import React, {Component} from 'react';
 import {View, Text, StyleSheet, TextInput} from 'react-native';
 import ModalSelector from 'react-native-modal-selector';
 
+/**
+ * Component that renders a view with a title and picker for the provided data. Depending on the hideInput props, 
+ * a textInput is also provided to make queries that would fill the picker data
+ */
 class PickerWithTitle extends Component {
   constructor(props) {
     super(props);

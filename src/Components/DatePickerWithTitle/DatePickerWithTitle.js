@@ -4,6 +4,9 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import {format} from 'date-fns';
 
+/**
+ * Component that renders a view with a title and a button for triggering a date picker (also displays selected date)
+ */
 class DatePickerWithTitle extends Component {
   constructor(props) {
     super(props);
